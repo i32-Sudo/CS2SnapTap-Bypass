@@ -1,1 +1,2 @@
-python SnapTapBypassed.py
+python snaptap.py
+pause
