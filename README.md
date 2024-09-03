@@ -5,4 +5,4 @@ This is just a personal SnapTap Project for CS2 I made in python to get past the
 - 64Tick Based Bhop Script
 - CounterStrafing with Randomization & Hotkey
 # Undetected?
-As of 9.2.2024 and probably for a long time yes, it is undetected. ClientSide VAC does not scan or iterate keyboard events or mouse events so this is completely fine to use.
+As of 9.2.2024 and probably for a long time yes, it is undetected. ClientSide VAC does not scan or iterate keyboard events or mouse events so this is completely fine to use. If you dont want the Python Interpreter to get enumerated compile it and use VMP or another packer/virtualizer.
