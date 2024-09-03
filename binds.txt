@@ -1,2 +1,3 @@
 bind "mwheeldown" "exec bhop"
 bind "mwheelup" "exec bhop"
+bind "space" "exec bhop"
