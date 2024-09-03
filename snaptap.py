@@ -20,10 +20,6 @@ activation_key = "space"  # Adjust based on your bhop button
 # Set default mode
 mode = 'SnapTap'
 
-def send_space(duration):
-    keyboard.send("space")
-    time.sleep(duration)
-
 def SnapTap(event):
     if event.event_type == 'down':
         pressed_keys.add(event.name)
@@ -81,9 +77,11 @@ def main():
 
     while True:
         if keyboard.is_pressed(activation_key) and mode == 'SnapTap':
-            send_space(TICK_64_MS * 1)
+            keyboard.send("space")
+            time.sleep(TICK_64_MS * 1)
             while keyboard.is_pressed(activation_key):
-                send_space(TICK_64_MS * 2)
+                keyboard.send("space")
+                time.sleep(TICK_64_MS * 2)
         else:
             time.sleep(0.001)  # prevent CPU overload
 
