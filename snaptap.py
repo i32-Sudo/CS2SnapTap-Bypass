@@ -68,7 +68,7 @@ def CounterStrafe(event):
             keyboard.press('a')
             time.sleep(random.randint(COUNTER_STRAFE_MIN_MS, COUNTER_STRAFE_MAX_MS) / 1000.0)
             keyboard.release('a')
-        #pressed_keys.discard(event.name)
+        pressed_keys.discard(event.name) # Remove if you have delay issues but this ensures the CounterStrafing & SnapTap Dont interfere with eachother
 
 def main():
     ctypes.windll.kernel32.SetConsoleTitleW(str("Notepad - " + str(random.randint(5, 5000)) + ".txt"))
