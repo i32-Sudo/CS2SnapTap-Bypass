@@ -6,9 +6,13 @@ import ctypes
 pressed_keys = set()
 
 # Constants
-ReleaseminMs = 30
-ReleasemaxMs = 70
+RELEASE_MIN_MS = 30
+RELEASE_MAX_MS = 70
+COUNTER_STRAFE_MIN_MS = 30
+COUNTER_STRAFE_MAX_MS = 75
+COUNTER_STRAFE_KEY = 'alt'
 TICK_64_MS = 0.0156 # Change as needed to account for Ping & FPS, If you have High FPS & Low Ping do not change
+key_press_times = {}
 
 exit_key = "end"
 activation_key = "space"  # Adjust based on your bhop button
@@ -25,12 +29,12 @@ def SnapTap(event):
         pressed_keys.add(event.name)
         
         if event.name == 'a' and 'd' in pressed_keys:
-            delayms = random.randint(ReleaseminMs, ReleasemaxMs)
+            delayms = random.randint(RELEASE_MIN_MS, RELEASE_MAX_MS)
             time.sleep(delayms / 1000.0)
             keyboard.release('d')
         
         elif event.name == 'd' and 'a' in pressed_keys:
-            delayms = random.randint(ReleaseminMs, ReleasemaxMs)
+            delayms = random.randint(RELEASE_MIN_MS, RELEASE_MAX_MS)
             time.sleep(delayms / 1000.0)
             keyboard.release('a')
         
@@ -45,6 +49,27 @@ def SnapTap(event):
             #delayms = random.randint(SetminMs, SetmaxMs)
             keyboard.press('d')
 
+def CounterStrafe(event):
+    if 'a' in pressed_keys and 'd' in pressed_keys:
+        return
+    if event.event_type == 'up' and COUNTER_STRAFE_KEY in pressed_keys:
+        # If both keys were previously pressed, do nothing
+        if 'a' in pressed_keys and 'd' in pressed_keys:
+            return
+
+        # If 'A' is released and 'D' is not still held down, counterstrafe with 'D'
+        if event.name == 'a' and 'd' not in pressed_keys:
+            keyboard.press('d')
+            time.sleep(random.randint(COUNTER_STRAFE_MIN_MS, COUNTER_STRAFE_MAX_MS) / 1000.0)
+            keyboard.release('d')
+
+        # If 'D' is released and 'A' is not still held down, counterstrafe with 'A'
+        elif event.name == 'd' and 'a' not in pressed_keys:
+            keyboard.press('a')
+            time.sleep(random.randint(COUNTER_STRAFE_MIN_MS, COUNTER_STRAFE_MAX_MS) / 1000.0)
+            keyboard.release('a')
+        #pressed_keys.discard(event.name)
+
 def main():
     ctypes.windll.kernel32.SetConsoleTitleW(str("Notepad - " + str(random.randint(5, 5000)) + ".txt"))
     # Add exit hotkey
@@ -52,7 +77,7 @@ def main():
     
     # Hook keyboard events for SnapTap
     keyboard.hook(SnapTap)
-
+    keyboard.hook(CounterStrafe)
 
     while True:
         if keyboard.is_pressed(activation_key) and mode == 'SnapTap':
