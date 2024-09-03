@@ -3,6 +3,7 @@ import random
 import time
 import ctypes
 import pygetwindow as gw
+from pynput.mouse import Controller, Button    
 from colorama import Fore
 
 pressed_keys = set()
@@ -103,18 +104,19 @@ def main():
     keyboard.hook(SnapTap)
     keyboard.hook(CounterStrafe)
 
+    mouse = Controller()
     while True:
         if keyboard.is_pressed(activation_key) and mode == 'SnapTap' and is_window_in_focus("Counter-Strike 2"):
             #print(f"{Fore.LIGHTBLACK_EX}[KeyDetection] space / down")
             print(f"{Fore.LIGHTMAGENTA_EX}[BHOP]{Fore.LIGHTBLACK_EX} Send Key (space) Input {Fore.WHITE}{activation_key} {Fore.YELLOW}{TICK_64_MS}/tps")
-            keyboard.send("space")
+            mouse.scroll(0, -1) # Mouse Scroll is better because spacebar can get stuck on its own inputs
+            #keyboard.send('space')
             time.sleep(TICK_64_MS * 1)
-            keyboard.release("space")
             while keyboard.is_pressed(activation_key):
                 print(f"{Fore.LIGHTMAGENTA_EX}[BHOP]{Fore.LIGHTBLACK_EX} Send Key (space) Input {Fore.WHITE}{activation_key} {Fore.YELLOW}{TICK_64_MS}/tps")
-                keyboard.send("space")
+                mouse.scroll(0, -1) # Mouse Scroll is better because spacebar can get stuck on its own inputs
+                #keyboard.send('space')
                 time.sleep(TICK_64_MS * 2)
-                keyboard.release("space")
         else:
             time.sleep(0.001)  # prevent CPU overload
 
