@@ -94,6 +94,7 @@ def CounterStrafe(event):
 def main():
     keyboard.unhook_all()
     keyboard.unhook_all_hotkeys()
+    print(f"{Fore.RED}Unhooked All\nUnhooked All Hotkeys")
     ctypes.windll.kernel32.SetConsoleTitleW(str("Notepad - " + str(random.randint(5, 5000)) + ".txt"))
     # Add exit hotkey
     keyboard.add_hotkey(exit_key, lambda: exit())
