@@ -13,7 +13,7 @@ RELEASE_MAX_MS = 70
 COUNTER_STRAFE_MIN_MS = 30
 COUNTER_STRAFE_MAX_MS = 75
 COUNTER_STRAFE_KEY = 'alt'
-TICK_64_MS = 0.0156 # Change as needed to account for Ping & FPS, If you have High FPS & Low Ping do not change
+TICK_64_MS = 0.0156 # This is set for a Ping of 40~, For every 10ms ping above this add 0.0005 to it, Do not use if you are above 80ms ping
 key_press_times = {}
 
 exit_key = "end"
