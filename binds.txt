@@ -1,0 +1,2 @@
+bind "mwheeldown" "exec bhop"
+bind "mwheelup" "exec bhop"
