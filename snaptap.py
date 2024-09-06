@@ -72,8 +72,6 @@ def CounterStrafe(event):
     global CounterStrafeIRQ
     time.sleep(0.001)  # prevent CPU overload
 
-    print(pressed_keys)
-
     if 'a' in pressed_keys and 'd' in pressed_keys:
         return
     if event.event_type == 'up' and COUNTER_STRAFE_KEY in pressed_keys and is_window_in_focus("Counter-Strike 2") and activation_key not in pressed_keys:
